@@ -19,18 +19,28 @@ public class GenerateDimensTool {
 
     /**
      *
-     * @param scaleRatio
+     * @param scaleRatio 1
      * @param folderName values-sw600dp, values-hdpi...etc.
-     * @param projectPath
+     * @param projectPath D:/
+     * @param dpMax 200
+     * @param dpMin 0
+     * @param spMax 80
+     * @param spMin 12
      */
-    public static void createDimens(float scaleRatio, String folderName, String projectPath) {
+    public static void createDimens(float scaleRatio,
+                                    String folderName,
+                                    String projectPath,
+                                    int dpMax,
+                                    int dpMin,
+                                    int spMax,
+                                    int spMin) {
         StringBuilder lines = new StringBuilder();
         //Add the tag at the beginning of xml
         String xmlStart = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
                 "<resources>\n";
         lines.append(xmlStart);
         //Add content
-        for (int i = 0; i <= 1920; i++) {
+        for (int i = dpMin; i <= dpMax; i++) {
             // The label name after name can be customized "margin_" to change at will
             float value = i * scaleRatio;
             String start = "<dimen name=\"dp_" + i + "\">";
@@ -38,7 +48,7 @@ public class GenerateDimensTool {
             lines.append(start).append(value).append(end).append("\n");
         }
 
-        for (int i = 0; i <= 180; i++) {
+        for (int i = spMin; i <= spMax; i++) {
             // The label name after name can be customized "margin_" to change at will
             float value = i * scaleRatio;
             String start = "<dimen name=\"sp_" + i + "\">";
